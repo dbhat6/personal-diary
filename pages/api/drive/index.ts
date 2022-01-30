@@ -1,6 +1,13 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { getUnixTime } from 'date-fns'
+import fs from 'fs'
+import path from 'path'
+
+import { Note } from "../../../src/classes/Note";
+// https://www.youtube.com/watch?v=Z2MCxblgPoc
 import { getDetails, createPost } from '../../../src/handlers/notetHandler';
+import drive from '../../../src/storage/driveAPI';
 
 type Data = {
   files: Object
@@ -11,17 +18,9 @@ export default function handler(
   res: NextApiResponse<Data>
 ) {
 
-  let data: any;
   switch (req.method) {
-    case "GET": {
-      data = getDetails()
+    case "GET": async (res: NextApiResponse) => await drive.listFiles(res)
       break;
-    }
-    case "POST": {
-      data = createPost(req.body)
-      break;
-    }
-    default: res.setHeader("allow", ["GET", "POST"]).status(405).end();
+    default: res.setHeader("allow", ["GET"]).status(405).end();
   }
-  res.status(200).json({ files: data })
 }

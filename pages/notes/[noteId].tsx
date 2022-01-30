@@ -1,17 +1,9 @@
 import * as React from 'react';
-import type { NextPage } from 'next';
 import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Link from '../../src/Link';
 import OutlinedCard from '../../src/components/NoteCard';
-import { useRouter } from 'next/router'
 
-const About: NextPage = ({ notes }) => {
-    const router = useRouter()
-    const { noteId } = router.query
-
+const Note = ({ notes }: { notes: any }):React.ReactElement => {
     return (
         <Container maxWidth="lg">
             <Box
@@ -22,15 +14,15 @@ const About: NextPage = ({ notes }) => {
                     justifyContent: 'center',
                 }}
             >
-                {notes.map(note => (
-                    <OutlinedCard heading={note.heading} body={note.body} tags={note.tags} createdAt={note.meta.date} />
+                {notes.map((note: any, index: number) => (
+                    <OutlinedCard key={index} heading={note.heading} body={note.body} tags={note.tags} createdAt={note.meta.date} />
                 ))}
             </Box>
         </Container>
     );
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context: any) {
     const { noteId } = context.params
     // Call an external API endpoint to get notes
     const res = await fetch(`http://localhost:3000/api/notes/${noteId}`)
@@ -45,4 +37,4 @@ export async function getServerSideProps(context) {
     }
 }
 
-export default About;
+export default Note;

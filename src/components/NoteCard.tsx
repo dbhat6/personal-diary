@@ -6,15 +6,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { TextField } from '@mui/material';
+import PropTypes, { InferProps } from 'prop-types';
 
-const tags = (tags: string[]) => {
-    let asd = tags.map(tag => {
-        <Button size="small">#{tag}</Button>
-    })
-    return asd
-}
-
-export default function OutlinedCard(props) {
+export default function OutlinedCard(props: InferProps<typeof OutlinedCard.propTypes>) {
     const body = props.body;
     return (
         <Box sx={{ minWidth: 275 }}>
@@ -33,11 +27,18 @@ export default function OutlinedCard(props) {
                 </CardContent>
                 <CardActions>
                     {/* {tags(props.tags)} */}
-                    {props.tags.map((tag: string, index: number) =>
+                    {props.tags?.map((tag: string, index: number) =>
                         (<Button key={index} size="small">#{tag}</Button>)
                     )}
                 </CardActions>
             </Card>
         </Box>
     );
+}
+
+OutlinedCard.propTypes = {
+    body: PropTypes.string,
+    heading: PropTypes.string,
+    createdAt: PropTypes.string,
+    tags: PropTypes.array,
 }

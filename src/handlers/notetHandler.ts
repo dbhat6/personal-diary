@@ -9,7 +9,7 @@ interface reqBody {
     body: string
 }
 
-const getPost = (noteId: string) => {
+const getPost = (noteId: string | string[]) => {
     let data = fs.readFileSync(`./notes/${noteId}`, "utf8");
     let notes = new Note({
         fileFormatString: data,
@@ -40,9 +40,9 @@ const createPost = (body: reqBody) => {
 
     let filePath;
     if (!file || file.size > 200) {
-        filePath = `./notes/${getUnixTime(new Date())}`;
+        filePath = `./notes/${getUnixTime(new Date())}.txt`;
     } else {
-        filePath = `./notes/${file?.file}`;
+        filePath = `./notes/${file?.file}.txt`;
     }
 
     fs.appendFileSync(

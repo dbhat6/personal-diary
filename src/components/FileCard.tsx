@@ -5,17 +5,10 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import LinkIcon from '@mui/icons-material/Link';
 import Link from 'next/link';
+import PropTypes, { InferProps } from 'prop-types';
 
-const tags = (tags: string[]) => {
-    let asd = tags.map(tag => {
-        <Button size="small">#{tag}</Button>
-    })
-    return asd
-}
-
-export default function OutlinedCard(props) {
+export default function OutlinedCard(props: InferProps<typeof OutlinedCard.propTypes>) {
     return (
         <Box sx={{ minWidth: 275 }}>
             <Card variant="outlined">
@@ -40,4 +33,10 @@ export default function OutlinedCard(props) {
             </Card>
         </Box>
     );
+}
+
+OutlinedCard.propTypes = {
+    file: PropTypes.string,
+    createdAt: PropTypes.string,
+    size: PropTypes.number,
 }

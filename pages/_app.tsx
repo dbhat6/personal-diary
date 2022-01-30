@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
 import theme from '../src/theme';
 import createEmotionCache from '../src/createEmotionCache';
-import { AppBar, Button, Divider, Drawer, FormControlLabel, FormGroup, IconButton, List, ListItem, ListItemIcon, ListItemText, Switch, Toolbar, Typography } from '@mui/material';
+import { AppBar, Button, Divider, Drawer, IconButton, List, ListItem, ListItemText, Toolbar } from '@mui/material';
 import { Box } from '@mui/system';
 import MenuIcon from '@mui/icons-material/Menu';
 import Link from 'next/link';
@@ -25,7 +25,7 @@ export default function MyApp(props: MyAppProps) {
     open: false,
   });
 
-  const toggleDrawer = (isOpen: boolean) => (event: KeyboardEvent) => {
+  const toggleDrawer = (isOpen: boolean) => (event: any) => {
     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
     }
@@ -36,9 +36,6 @@ export default function MyApp(props: MyAppProps) {
   const list = (
     <Box
       sx={{ width: 250 }}
-      role="presentation"
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
     >
       <List>
         {[{ text: 'Create Note', page: "/" }, { text: 'List Note Files', page: "/notes" }].map(({ text, page }, index) => (
@@ -70,7 +67,6 @@ export default function MyApp(props: MyAppProps) {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
             sx={{ mr: 2 }}
             onClick={toggleDrawer(true)}
           >

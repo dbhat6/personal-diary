@@ -1,11 +1,10 @@
 import * as React from 'react';
-import type { NextPage } from 'next';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FileCard from '../../src/components/FileCard';
 
-const About: NextPage = ({ files }) => {
+const Notes = ({ files }: { files: any }): React.ReactElement => {
     console.log(files)
     return (
         <Container maxWidth="lg">
@@ -17,8 +16,8 @@ const About: NextPage = ({ files }) => {
                     justifyContent: 'center',
                 }}
             >
-                {files.length > 0 ? files.map(file => (
-                    <FileCard file={file.file} createdAt={file.createdAt} size={file.size} />
+                {files.length > 0 ? files.map((file: any, index: number) => (
+                    <FileCard key={index} file={file.file} createdAt={file.createdAt} size={file.size} />
                 )) : (<Typography variant="h2" gutterBottom component="div" sx={{ mx: 15 }} >Nothing to display here</Typography>)}
             </Box>
 
@@ -41,4 +40,4 @@ export async function getServerSideProps() {
     }
 }
 
-export default About;
+export default Notes;
