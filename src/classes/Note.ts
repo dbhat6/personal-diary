@@ -1,24 +1,22 @@
-import { getUnixTime } from 'date-fns'
-
+import { getUnixTime } from "date-fns";
 
 interface IMeta {
-  date: Date
+  date: Date;
 }
 
 interface IParams {
-  heading: string
-  tags: string[]
-  body: string
-  fileFormatString: string
+  heading: string;
+  tags: string[];
+  body: string;
+  fileFormatString: string;
 }
 
-
 export class Note {
-  heading: string
-  tags: string[]
-  body: string
-  fileFormatString: string
-  meta: IMeta
+  heading: string;
+  tags: string[];
+  body: string;
+  fileFormatString: string;
+  meta: IMeta;
 
   constructor(params?: IParams, metaParam?: IMeta) {
     this.heading = params?.heading ?? "";
@@ -26,12 +24,12 @@ export class Note {
     this.body = params?.body ?? "";
     this.fileFormatString = params?.fileFormatString ?? "";
     this.meta = <IMeta>{
-      date: metaParam?.date || new Date()
-    }
+      date: metaParam?.date || new Date(),
+    };
   }
 
   toFileFormat() {
-    let str = [];
+    const str = [];
     str.push(this.heading);
     str.push("@@@@");
     str.push(this.body);
@@ -45,28 +43,31 @@ export class Note {
   }
 
   toObj() {
-    let notes = this.fileFormatString.split("==============================")
-    let allNotes = notes.map(note => {
-      if(!note.trim()) return;
+    const notes = this.fileFormatString.split("==============================");
+    const allNotes = notes.map((note) => {
+      if (!note.trim()) return;
 
-      let body = note.split("@@@@")
-      body[0] = body[0].trim()
-      body[1] = body[1].trim()
-      body[2] = body[2].trim()
+      const body = note.split("@@@@");
+      body[0] = body[0].trim();
+      body[1] = body[1].trim();
+      body[2] = body[2].trim();
 
-      let tagObj = body[2].split("####")
-      tagObj[1] = tagObj[1].trim()
-      tagObj[2] = tagObj[2].trim()
+      const tagObj = body[2].split("####");
+      tagObj[1] = tagObj[1].trim();
+      tagObj[2] = tagObj[2].trim();
 
-      return new Note({
-        heading: body[0],
-        body: body[1],
-        tags: tagObj[1].split(" "),
-        fileFormatString: ""
-      }, {
-        date: new Date(parseInt(tagObj[2]) * 1000)
-      })
-    })
-    return allNotes
+      return new Note(
+        {
+          heading: body[0],
+          body: body[1],
+          tags: tagObj[1].split(" "),
+          fileFormatString: "",
+        },
+        {
+          date: new Date(parseInt(tagObj[2]) * 1000),
+        }
+      );
+    });
+    return allNotes;
   }
 }
