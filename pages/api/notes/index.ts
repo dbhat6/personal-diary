@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { getDetails, createPost } from '../../../src/handlers/notetHandler';
 
 type Data = {
-  files: Object
+  files: any
 }
 
 export default function handler(

@@ -1,17 +1,11 @@
 const { argv } = require("process");
 const fs = require("fs");
-const path = require("path");
 const keys = require("../../config/keys.json");
 const { google } = require("googleapis");
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ["https://www.googleapis.com/auth/drive"];
-const auth = new google.auth.JWT(
-  keys.client_email,
-  undefined,
-  keys.private_key,
-  SCOPES
-);
+const auth = new google.auth.JWT(keys.client_email, undefined, keys.private_key, SCOPES);
 
 auth.authorize(function (err) {
   if (err) {
@@ -84,7 +78,8 @@ async function downloadFiles(fileId, fileName) {
  * @param {google.auth.OAuth2} auth An authorized OAuth2 client.
  */
 async function updateFiles(fileId, fileName) {
-  const fileContent = fs.readFileSync(`./notes/${fileName}`);
+  // const fileContent = fs.readFileSync(`./notes/${fileName}`);
+  console.log(fileName);
   drive.files.update({
     fileId: fileId,
     addParents: "1VzmLyZTfqRmurLFWA8ixVgoEFivHZ0kg",
@@ -106,19 +101,13 @@ async function updateFiles(fileId, fileName) {
         console.log(
           "Syntax for publish: npm run s3:ops publish <KEY_PATH_EXCLUDING_FILE_NAME_AND_ENDING_FORWARDSLASH> <PATH_TO_FILE>"
         );
-        console.log(
-          "Example command for publish: npm run s3:ops publish testing ./sample-program-definition.json"
-        );
+        console.log("Example command for publish: npm run s3:ops publish testing ./sample-program-definition.json");
         console.log(
           "This pushes sample-program-definition.json to the path testing/sample-program-definition.json within the configured S3 bucket\n"
         );
 
-        console.log(
-          "Syntax for fetch: npm run s3:ops fetch <KEY_PATH_IN_S3_INCLUDING_FILE_NAME> <versionId>:OPTIONAL"
-        );
-        console.log(
-          "Example command for fetch: npm run s3:ops fetch testing/sample-program-definition.json"
-        );
+        console.log("Syntax for fetch: npm run s3:ops fetch <KEY_PATH_IN_S3_INCLUDING_FILE_NAME> <versionId>:OPTIONAL");
+        console.log("Example command for fetch: npm run s3:ops fetch testing/sample-program-definition.json");
         console.log(
           "This pulls the latest sample-program-definition.json from the path testing/sample-program-definition.json within the configured S3 bucket and puts it in the directory from which the command is run"
         );

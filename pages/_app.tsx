@@ -1,15 +1,15 @@
-import * as React from 'react';
-import Head from 'next/head';
-import { AppProps } from 'next/app';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../src/theme';
-import createEmotionCache from '../src/createEmotionCache';
-import { AppBar, Button, Divider, Drawer, IconButton, List, ListItem, ListItemText, Toolbar } from '@mui/material';
-import { Box } from '@mui/system';
-import MenuIcon from '@mui/icons-material/Menu';
-import Link from 'next/link';
+import * as React from "react";
+import Head from "next/head";
+import { AppProps } from "next/app";
+import { ThemeProvider } from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
+import { CacheProvider, EmotionCache } from "@emotion/react";
+import theme from "../src/theme";
+import createEmotionCache from "../src/createEmotionCache";
+import { AppBar, Button, Divider, Drawer, IconButton, List, ListItem, ListItemText, Toolbar } from "@mui/material";
+import { Box } from "@mui/system";
+import MenuIcon from "@mui/icons-material/Menu";
+import Link from "next/link";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
@@ -26,7 +26,7 @@ export default function MyApp(props: MyAppProps) {
   });
 
   const toggleDrawer = (isOpen: boolean) => (event: any) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (event.type === "keydown" && (event.key === "Tab" || event.key === "Shift")) {
       return;
     }
 
@@ -34,11 +34,12 @@ export default function MyApp(props: MyAppProps) {
   };
 
   const list = (
-    <Box
-      sx={{ width: 250 }}
-    >
+    <Box sx={{ width: 250 }}>
       <List>
-        {[{ text: 'Create Note', page: "/" }, { text: 'List Note Files', page: "/notes" }].map(({ text, page }, index) => (
+        {[
+          { text: "Create Note", page: "/" },
+          { text: "List Note Files", page: "/notes" },
+        ].map(({ text, page }) => (
           <ListItem button key={text}>
             <Link href={`${page}`} passHref>
               <ListItemText primary={text} />
@@ -48,7 +49,7 @@ export default function MyApp(props: MyAppProps) {
       </List>
       <Divider />
       <List>
-        {[{ text: 'About', page: "/about" }].map(({ text, page }, index) => (
+        {[{ text: "About", page: "/about" }].map(({ text, page }) => (
           <ListItem button key={text}>
             <Link href={`${page}`} passHref>
               <ListItemText primary={text} />
@@ -56,30 +57,22 @@ export default function MyApp(props: MyAppProps) {
           </ListItem>
         ))}
       </List>
-    </Box >
+    </Box>
   );
 
   const appBar = (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            sx={{ mr: 2 }}
-            onClick={toggleDrawer(true)}
-          >
+          <IconButton size="large" edge="start" color="inherit" sx={{ mr: 2 }} onClick={toggleDrawer(true)}>
             <MenuIcon />
           </IconButton>
-          <Button color="inherit">
-            Placeholder Tab 1
-          </Button>
+          <Button color="inherit">Placeholder Tab 1</Button>
           <Button color="inherit">Placeholder Tab 2</Button>
         </Toolbar>
       </AppBar>
     </Box>
-  )
+  );
 
   return (
     <CacheProvider value={emotionCache}>
@@ -92,10 +85,7 @@ export default function MyApp(props: MyAppProps) {
         <div>
           {appBar}
           <React.Fragment>
-            <Drawer
-              open={state.open}
-              onClose={toggleDrawer(false)}
-            >
+            <Drawer open={state.open} onClose={toggleDrawer(false)}>
               {list}
             </Drawer>
           </React.Fragment>

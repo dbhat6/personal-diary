@@ -5,7 +5,7 @@ export default function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    let { noteId } = req.query
+    const { noteId } = req.query
     switch (req.method) {
         case "GET": {
             let data = getPost(noteId)

@@ -1,9 +1,9 @@
-import * as React from 'react';
-import type { NextPage } from 'next';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
-import Box from '@mui/material/Box';
-import { Button, Paper, TextField } from '@mui/material';
+import * as React from "react";
+import type { NextPage } from "next";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
+import { Button, Paper, TextField } from "@mui/material";
 
 const Home: NextPage = () => {
   const [headingValue, setHeadingValue] = React.useState<string>("");
@@ -13,25 +13,25 @@ const Home: NextPage = () => {
   const onHeadingChange = (e: any) => setHeadingValue(e.target.value);
   const onTextChange = (e: any) => setTextValue(e.target.value);
   const onTagChange = (e: any) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setTagValue(e.target.value);
-  }
+  };
   const handleSubmit = async () => {
     console.log({ textValue, headingValue, tagValue });
-    const res = await fetch('/api/notes', {
+    const res = await fetch("/api/notes", {
       body: JSON.stringify({ body: textValue, heading: headingValue, tags: tagValue.split(" ") }),
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      method: 'POST'
+      method: "POST",
     });
     console.log(res);
     handleReset();
-  }
+  };
   const handleReset = () => {
-    setHeadingValue("")
-    setTextValue("")
-    setTagValue("")
+    setHeadingValue("");
+    setTextValue("");
+    setTagValue("");
   };
 
   return (
@@ -39,14 +39,16 @@ const Home: NextPage = () => {
       <Box
         sx={{
           my: 20,
-          display: 'inherit',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "inherit",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
         <Paper>
-          <Typography variant="h4" gutterBottom component="div" textAlign="center">Create Card</Typography>
+          <Typography variant="h4" gutterBottom component="div" textAlign="center">
+            Create Card
+          </Typography>
 
           <TextField
             onChange={onHeadingChange}
@@ -55,7 +57,7 @@ const Home: NextPage = () => {
             label={"Heading Value"}
             sx={{
               my: 2,
-              display: 'flex'
+              display: "flex",
             }}
           />
 
@@ -67,7 +69,7 @@ const Home: NextPage = () => {
             label={"Body Value"}
             sx={{
               my: 2,
-              display: 'flex'
+              display: "flex",
             }}
           />
 
@@ -78,7 +80,7 @@ const Home: NextPage = () => {
             label={"Tag Value - Separated by space"}
             sx={{
               my: 2,
-              display: 'flex'
+              display: "flex",
             }}
           />
 
