@@ -6,7 +6,7 @@ const { google } = require("googleapis");
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ["https://www.googleapis.com/auth/drive"];
-const parentFolderId = process.env.PARENT_FOLDER || "1VzmLyZTfqRmurLFWA8ixVgoEFivHZ0kg";
+const parentFolderId = process.env.PARENT_FOLDER || "";
 let drive;
 
 const authorize = async () => {
