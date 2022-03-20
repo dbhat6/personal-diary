@@ -25,8 +25,7 @@ const authorize = async () => {
 };
 
 const doKeysFileExists = () => {
-  let isFileExists = keys ? true : false;
-  console.log(isFileExists);
+  if (!keys) console.log("Keys do not exist in your machine");
 };
 
 /**

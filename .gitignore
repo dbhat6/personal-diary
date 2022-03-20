@@ -39,3 +39,4 @@ yarn-error.log*
 notes/
 token/
 config/keys.json
+config/fileList.json

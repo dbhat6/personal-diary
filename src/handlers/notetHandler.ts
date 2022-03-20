@@ -40,10 +40,10 @@ const createPost = (body: reqBody) => {
   const file = files.length ? files[0] : undefined;
 
   let filePath;
-  if (!file || file.size > 200) {
+  if (!file || file.size > 400) {
     filePath = `./notes/${getUnixTime(new Date())}.txt`;
   } else {
-    filePath = `./notes/${file?.file}.txt`;
+    filePath = `./notes/${file?.file}`;
   }
 
   fs.appendFileSync(

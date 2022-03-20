@@ -6,7 +6,7 @@
     "build": "next build",
     "prestart": "npm run drive:ops fetch",
     "start": "next start",
-    "poststart": "npm run drive:ops publish",
+    "publish:files": "npm run drive:ops publish",
     "next:lint": "next lint",
     "rm": "rm notes/*",
     "pretty:check": "prettier --check .",
